@@ -1,0 +1,35 @@
+%hw problem 6
+%at is a says b is the truth teller
+%bt is b says both of them are opposite types
+bt v ~bt.
+at v ~at. 
+bt :- at.
+~bt :- ~at.
+~at :- bt.
+~at :- ~bt.
+%the resulting model is {-bt, -at} which means the 
+%only model that works is when both bt and at are false
+%
+%hw problem 7 
+%zt is zoe who says both of them are the same
+%mt is marge who says both are either true tellers or both liars
+zt v ~zt.
+mt v ~mt. 
+zt :- mt.
+zt :- ~mt. 
+mt :- zt.
+mt :- ~zt.
+%{zt, mt}
+%both of them are truth tellers
+%
+%hw problem 8
+st v ~st.
+bzt v ~bzt.
+mlt v ~mlt.
+~mlt :- st.
+mlt :- ~st.
+mlt :- bzt.
+~mlt :- ~bzt.
+st :- ~mlt.
+~st :- ~mlt.
+%{-st, bzt, mlt} sue is a liar. Bozo and Mel are truth tellers
