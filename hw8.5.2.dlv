@@ -1,0 +1,19 @@
+#maxint=100.
+% Names of all the granchildren
+name(franklin).
+name(guy).
+name(rosemarie).
+name(sadie).
+name(tanya).
+%
+% Birthdays
+bday(X, april_3) v bday(X, april_7) v bday(X, april_11) v 
+bday(X, april_15) v bday(X, april_19) :- name(X).
+%
+% Age
+age(X, 5) v age(X, 8) v age(X, 9) v age(X, 12) v age(X, 18) :- name(X).
+%
+% Town
+town(X, filmore) v town(X, goldfield) v town(X, lemars) v town(X, stpaul) v 
+town(X, urbana) :- name(X).
+

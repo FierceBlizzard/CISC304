@@ -1,0 +1,26 @@
+% Define the possible grandchildren and their attributes
+name(franklin). name(guy). name(rosemarie). name(sadie). name(tanya).
+bday(franklin, 19). bday(guy, 11). bday(rosemarie, _). bday(sadie, _). bday(tanya, _).
+age(franklin, _). age(guy, _). age(rosemarie, _). age(sadie, _). age(tanya, _).
+town(franklin, _). town(guy, _). town(rosemarie, _). town(sadie, _). town(tanya, _).
+% Define the constraints and information given in the problem
+% a. Of the child from Le Mars and the 9-year-old, one is Franklin and the other was born on April 19th.
+:- (town(X, lemars), age(X, 9), bday(X, 19)), (name(Y), Y != X, age(Y, 9), bday(Y, 19)), (X != franklin ; Y != franklin).
+% b. Of the grandchild with the April 15th birthday and the 8-year-old, one lives in Fillmore and the other lives in Urbana.
+:- (bday(X, 15), age(X, 8)), (town(X, fillmore), town(Y, urbana), age(Y, 8)), (X != rosemarie ; Y != rosemarie).
+% c. The grandchild from Goldfield, the 5-year-old, and the 9-year-old are three different children.
+:- (town(X, goldfield), age(X, 5)), (age(Y, 9)), (X = Y ; X = rosemarie ; Y = rosemarie).
+% d. The one from Fillmore isn't 9 years old.
+:- (town(X, fillmore), age(X, 9)).
+% e. Guy was born on April 11th.
+:- (name(guy), bday(guy, BD)), BD != 11.
+% f. The 9-year-old has a birthday sometime after Sadie.
+:- (age(X, 9), bday(X, BX)), (name(Y), age(Y, 18), bday(Y, BY), BY < BX).
+% g. Sadie wasn't born on April 7th.
+:- (name(sadie), bday(sadie, 7)).
+% h. Rosemarie isn't 8 years old.
+:- (name(rosemarie), age(rosemarie, 8)).
+% i. The 18-year-old has a birthday 8 days after the 12-year-old.
+:- (name(X), age(X, 12), bday(X, BX), name(Y), age(Y, 18), bday(Y, BY), DIFF = BY - BX, DIFF != 8).
+% Define a solution predicate that matches each grandchild to their attributes
+solution(N,B,A,T) :- name(N), bday(N,B), age(N,A), town(N,T).

@@ -1,0 +1,22 @@
+% dee-p -> Tweedledee has the Purple card.
+% -dee-p -> Tweedledee has the Orange card.
+% dum-p -> Tweedledum has the Purple card.
+% -dum-p -> Tweedledum has the Orange card.
+% dee-first -> Tweedledee is First.
+% -dee-first -> Tweedledee is Second.
+% dum-first -> Tweedledum is First.
+% -dum-first -> Tweedledum is Second.
+%
+dee-p v -dee-p.
+dum-p v -dum-p.
+dee-first v -dee-first.
+dum-first v -dum-first.
+%
+:- dee-p, dum-p.
+dee-p.
+:- dee-p, dee-first.
+-dee-first.
+dum-first.
+%
+% Tweedledum was First and had the Orange card
+% Tweedledee was second and had the Purple card

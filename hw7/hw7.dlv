@@ -1,0 +1,36 @@
+% setting up husbands, wives, and son
+husband(barber).
+husband(cutler).
+husband(drake).
+wife(beth).
+wife(dorothy).
+wife(louise).
+son(allan).
+son(henry).
+son(victor).
+% setting up the monogomous relationships
+married(H, beth) v married(H, dorothy) v married(H, louise) :- husband(H).
+married(barber, W) v married(cutler, W) v married(drake, W) :- wife(W).
+% monogomous relationships
+:- married(H, X), married(H, Y), X!=Y. 
+:- married(X, W), married(Y, W), X!=Y.
+% 2 people married, they make a family with one of the three sons in the list
+family(H, W, allan) v family(H, W, henry) v family(H, W, victor) :- married(H, W).
+% making sure that each family only has 1 son
+:- family(H, W, X), family(H, W, Y), X!=Y.
+% making sure  each son has only 1 father and 1 mother
+:- family(X, W1, S), family(Y, W2, S), X!=Y.
+:- family(H1, X,  S), family(H2, Y, S), X!=Y.
+% Drake is neither Louise's husband nor Henry's father
+~married(drake, louise).
+:- family(H, beth, allan).
+% Beth is neither Cutler's wife nor Allan's mother
+~married(cutler, beth).
+:- family(H, beth, allan).
+% If Allan's father is either Cutler or Drake, then Louise is Victor's mother
+family(H, louise, victor) :- family(cutler, W, allan), husband(H).
+family(H, louise, victor) :- family(drake, W, allan), husband(H).
+% If Louise is Cutler's wife, Dorothy is not Allan's mother.
+~family(H, dorothy, allan) :- married(cutler, louise), husband(H).
+% the answer for the whole problem is: 
+% {family(barber,louise,allan), family(cutler,dorothy,henry), family(drake,beth,victor)}

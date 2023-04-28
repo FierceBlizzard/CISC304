@@ -1,0 +1,29 @@
+% setting up all the gates
+gate(orG).
+gate(andG).
+gate(notG).
+% Setting up the or gate
+ON(w4) :- OK(orG), ON(w1).
+ON(w4) :- OK(orG), ON(w2).
+~ON(w4) :- OK(orG), ~ON(w1), ~ON(w2).
+% Setting up the not gate
+ON(w5) :- OK(notG), ~ON(w3).
+~ON(w5) :- OK(notG), ON(w3).
+% Setting up the and gate
+ON(w6) :- OK(andG), ON(w4), ON(w5).
+~ON(w6) :- OK(andG), ~ON(w4).
+~ON(w6) :- OK(andG), ~ON(w5).
+% Setting up the condition where a gate is OK or not OK
+OK(X) v ~OK(X) :- gate(X).
+% Making sure that only one gate is not okay at a time
+:- ~OK(X), ~OK(Y), X!=Y.
+% Introducing the assumptions to make the models
+ON(w1).
+ON(w2).
+ON(w3).
+~ON(w6).
+% output: 
+%{gate(orG), gate(andG), gate(notG), ON(w1), ON(w2), ON(w3), -ON(w6), OK(orG), -OK(andG), OK(notG), ON(w4), -ON(w5)}
+%{gate(orG), gate(andG), gate(notG), ON(w1), ON(w2), ON(w3), -ON(w6), -OK(orG), OK(andG), OK(notG), -ON(w5)}
+% The first one is showing when the and gate is not okay and causing errors
+% The second oen is showing when the or gate is not okay and causing errors

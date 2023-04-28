@@ -1,0 +1,21 @@
+% setting up all the gates
+gate(orG).
+gate(andG).
+gate(notG).
+% Setting up the or gate
+ON(w4) :- OK(orG), ON(w1).
+ON(w4) :- OK(orG), ON(w2).
+~ON(w4) :- OK(orG), ~ON(w1), ~ON(w2).
+% Setting up the not gate
+ON(w5) :- OK(notG), ~ON(w3).
+~ON(w5) :- OK(notG), ON(w3).
+% Setting up the and gate
+ON(w6) :- OK(andG), ON(w4), ON(w5).
+~ON(w6) :- OK(andG), ~ON(w4).
+~ON(w6) :- OK(andG), ~ON(w5).
+% Introducing the assumption to see the model that will be produced
+OK(X) :- gate(X).
+ON(w1).
+ON(w2).
+ON(w3).
+% resulting model: {gate(orG), gate(andG), gate(notG), ON(w4), ON(w1), ON(w2), ON(w3), OK(orG), OK(andG), OK(notG), -ON(w5), -ON(w6)}

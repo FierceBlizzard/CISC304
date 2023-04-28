@@ -1,0 +1,39 @@
+% LTT - left is the truthteller.
+% DL - left is the diplomat.
+% GLL - left is the liar.
+% MTT - the one in middle is a truthteller.
+% MD - the one in middle is a diplomat. 
+% LM - the one in middle is a liar. 
+% RTT - right is the truthteller. 
+% RD - right is the diplomat. 
+% RL - right is the liar. 
+%
+LTT v -LTT.
+DL v -DL.
+GLL v -GLL.
+MTT v -MTT.
+MD v -MD.
+LM v -LM.
+RTT v -RTT.
+RD v -RD.
+RL v -RL.
+%
+LTT v DL v GLL.
+MTT v MD v LM.
+RTT v RD v RL.
+LTT v MTT v RTT.
+DL v MD v RD.
+GLL v LM v RL.
+%
+-LTT.
+-MTT.
+:- GLL, DL.
+:- MD, LM.
+:- RTT, RD.
+:- RTT, RL.
+:- RD, RL.
+:- MD, RTT.
+%
+% The one on the left is the God of Diplomacy and a liar
+% The one in the middle is the God of Falsehood
+% The one on the right is the God of Truth
