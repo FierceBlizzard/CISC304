@@ -1,0 +1,11 @@
+% (a) What are the names and sizes of the lakes in Wisconsin
+q5a(Name,Size) :- lakein(Name,'wisconsin'), lake(Name,Size).
+% (b) What cities are in states that border Wisconsin, and also have the same name as a city
+% in some other state as well?
+q5b(City) :- city(State,_,City,_), borders(BorderState,'WI'), borders(BorderState,State), city(OtherState,_,City,_), OtherState != State, state(BorderState,_,_,_,_,_,_,_,_,_), state(State,_,_,_,_,_,_,_,_,_).
+% (c) Which lakes are in at least three different states?
+q5c(Lake) :- lakein(Lake,State1), lakein(Lake,State2), lakein(Lake,State3), State1 != State2, State1 != State3, State2 != State3.
+% (d) Find the total population of every state the Ohio River passes through
+q5d(PopulationSum) :- state(State,_,_,Population,_,_,_,_,_,_), riverin('Ohio',State), PopulationSum = #sum{Population : riverin('Ohio',State)}.
+% (e) What state has the highest point?
+q5e(HighestState) :- state(HighestState,_,_,_,_,_,_,_,_,_), highlow(HighestState,_,_,HighestPoint,_,_), not {OtherPoint : highlow(_,_,_,OtherPoint,_,_), OtherPoint > HighestPoint}.
